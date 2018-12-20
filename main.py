@@ -1,10 +1,11 @@
 import pygame
 import json
+from cenario import Cenario
 from pygame import FULLSCREEN, QUIT, KEYDOWN, K_ESCAPE, MOUSEBUTTONDOWN, MOUSEBUTTONUP
 
 pygame.init()
 
-scr = pygame.display.set_mode((1020, 760), 0, 32)
+scr = pygame.display.set_mode((1020, 760), FULLSCREEN, 32)
 
 clock = pygame.time.Clock()
 
@@ -13,6 +14,9 @@ mapfile = open("defaultmap.json", "r")
 mapa = json.load(mapfile)
 mapfile.close()
 
+mapsize = 20
+
+dictmap = []
 
 
 tijolos = [{"nome": "chao", "indice": 1, "cor": (255, 255, 255)},
@@ -35,23 +39,18 @@ def mousecolide(dict, mousepos, rect = False):
 
 
 def gameloop():
+    cenario = Cenario(scr, dictmap, tijolos, mapa)
     run = True
     while run:
         clock.tick(120)
         scr.fill((0, 0, 0))
 
-        for col in range(20):
-            for lin in range(20):
-                for bloco in tijolos:
-                    if bloco["indice"] == mapa[col][lin]:
-                        pygame.draw.rect(scr, bloco["cor"], [lin * 51, col * 38, 51, 38])
-
-        for e in pygame.event.get():
-            if e.type == QUIT:
-                exit()
-            elif e.type == KEYDOWN:
-                if e.key == K_ESCAPE:
-                    run = False
+        #update
+        cenario.update()
+        #draw
+        cenario.draw()
+        #eventos
+        cenario.eventos()
 
         pygame.display.update()
 
@@ -82,10 +81,17 @@ def mainmenu():
                 exit()
             elif e.type == KEYDOWN:
                 if e.key == K_ESCAPE:
-                    run = False
+                    exit()
             elif e.type == MOUSEBUTTONDOWN:
                 if e.button == 1:
                     if mousecolide(start, mouse):
+                        for col in range(mapsize):
+                            for lin in range(mapsize):
+                                for item in tijolos:
+                                    if item["indice"] == mapa[col][lin]:
+                                        itemnew = {"indice": item["indice"], "rect":[lin * 51, col * 38, 51, 38]}
+                                        dictmap.append(itemnew)
+                        print(dictmap)
                         gameloop()
                     elif mousecolide(mapeditor, mouse):
                         mapeditorloop()
@@ -98,8 +104,8 @@ def mapeditorloop():
     startrect = startimg.get_rect()
     start = {"x": 100, "y": 500, "w": startrect.w, "h": startrect.h}
     saveimg = pygame.image.load("assets/menu/tutorial.png").convert_alpha()
-    saverect = startimg.get_rect()
-    save = {"x": 100, "y": 600, "w": startrect.w, "h": startrect.h}
+    saverect = saveimg.get_rect()
+    save = {"x": 100, "y": 600, "w": saverect.w, "h": saverect.h}
     tijoloseditor = []
 
     clicando = False
