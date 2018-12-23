@@ -5,12 +5,40 @@ from pygame import *
 class Cenario(object):
     def __init__(self, scr, dictmap, tijolos, mapa):
         self.scr = scr
-        self.ply = player.Player([920, 650, 25, 38], (0, 0, 255), self.scr, [K_RIGHT, K_LEFT, K_UP])
-        self.ply2 = player.Player([200, 650, 25, 38], (0, 255, 0), self.scr, [K_d, K_a, K_w])
-        self.ply3 = player.Player([920, 100, 25, 38], (255, 0, 0), self.scr, [K_n, K_v, K_g])
-        self.ply4 = player.Player([200, 100, 25, 38], (255, 255, 0), self.scr, [K_l, K_j, K_i])
-        self.flag = Flag([400, 400, 6.5, 10], (0, 255, 255), self.scr)
+        self.plyrect = [0, 0, 25, 38]
+        self.ply2rect = [0, 0, 25, 38]
+        self.ply3rect = [0, 0, 25, 38]
+        self.ply4rect = [0, 0, 25, 38]
+        self.flagrect = [0, 0, 6.5, 10]
+        self.count = 1
         self.dictmap = dictmap
+        for bloco in self.dictmap:
+            if bloco["indice"] == 3:
+                if self.count == 1:
+                    self.plyrect[0] = bloco["rect"][0]
+                    self.plyrect[1] = bloco["rect"][1]
+                    self.count += 1
+                elif self.count == 2:
+                    self.ply2rect[0] = bloco["rect"][0]
+                    self.ply2rect[1] = bloco["rect"][1]
+                    self.count += 1
+                elif self.count == 3:
+                    self.ply3rect[0] = bloco["rect"][0]
+                    self.ply3rect[1] = bloco["rect"][1]
+                    self.count += 1
+                elif self.count == 4:
+                    self.ply4rect[0] = bloco["rect"][0]
+                    self.ply4rect[1] = bloco["rect"][1]
+                    self.count += 1
+            elif bloco["indice"] == 4:
+                self.flagrect[0] = bloco["rect"][0]
+                self.flagrect[1] = bloco["rect"][1]
+
+        self.ply = player.Player(self.plyrect, (0, 0, 255), self.scr, [K_RIGHT, K_LEFT, K_UP])
+        self.ply2 = player.Player(self.ply2rect, (0, 255, 0), self.scr, [K_d, K_a, K_w])
+        self.ply3 = player.Player(self.ply3rect, (255, 0, 0), self.scr, [K_n, K_v, K_g])
+        self.ply4 = player.Player(self.ply4rect, (255, 255, 0), self.scr, [K_l, K_j, K_i])
+        self.flag = Flag(self.flagrect, (0, 255, 255), self.scr)
         self.tijolos = tijolos
         self.mapa = mapa
 
@@ -120,7 +148,12 @@ class Cenario(object):
             for lin in range(20):
                 for bloco in self.tijolos:
                     if bloco["indice"] == self.mapa[col][lin]:
-                        pygame.draw.rect(self.scr, bloco["cor"], [lin * 51, col * 38, 51, 38])
+                        if bloco["indice"] == 3:
+                            pygame.draw.rect(self.scr, (0, 0, 0), [lin * 51, col * 38, 51, 38])
+                        elif bloco["indice"] == 4:
+                            pygame.draw.rect(self.scr, (0, 0, 0), [lin * 51, col * 38, 51, 38])
+                        else:
+                            pygame.draw.rect(self.scr, bloco["cor"], [lin * 51, col * 38, 51, 38])
         self.scr.blit(self.ply.scoreimg, (10, 10))
         self.scr.blit(self.ply2.scoreimg, (260, 10))
         self.scr.blit(self.ply3.scoreimg, (510, 10))

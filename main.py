@@ -19,8 +19,11 @@ mapsize = 20
 dictmap = []
 
 
-tijolos = [{"nome": "chao", "indice": 1, "cor": (255, 255, 255)},
-           {"nome": "vazio", "indice": 0, "cor": (0, 0, 0)}]
+tijolos = [{"nome": "vazio", "indice": 0, "cor": (0, 0, 0)},
+           {"nome": "chao", "indice": 1, "cor": (255, 255, 255)},
+           {"nome": "gelo", "indice": 2, "cor": (55, 55, 255)},
+           {"nome": "spawn", "indice": 3, "cor": (0, 255, 0)},
+           {"nome": "flag", "indice": 4, "cor": (255, 0, 0)}]
 
 
 def mousecolide(dict, mousepos, rect = False):
@@ -120,7 +123,7 @@ def mapeditorloop():
     run = True
     while run:
         clock.tick(120)
-        scr.fill((0, 0, 255))
+        scr.fill((50, 50, 50))
 
         #update
         mouse = pygame.mouse.get_pos()
