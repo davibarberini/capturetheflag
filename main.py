@@ -10,11 +10,57 @@ scr = pygame.display.set_mode((1020, 760), FULLSCREEN, 32)
 clock = pygame.time.Clock()
 
 
+"""mapa = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 5, 5, 5, 5, 5, 0, 0, 0, 4, 0, 0, 0, 5, 5, 5, 5, 5, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ]
+        
+mapfile = open("defaultmap.json", "w")
+mapfile.write(str(mapa))
+mapfile.close()
+"""
 mapfile = open("defaultmap.json", "r")
 mapa = json.load(mapfile)
 mapfile.close()
 
-mapsize = 20
+mapsize = 40
 
 dictmap = []
 
@@ -23,7 +69,8 @@ tijolos = [{"nome": "vazio", "indice": 0, "cor": (0, 0, 0)},
            {"nome": "chao", "indice": 1, "cor": (255, 255, 255)},
            {"nome": "gelo", "indice": 2, "cor": (55, 55, 255)},
            {"nome": "spawn", "indice": 3, "cor": (0, 255, 0)},
-           {"nome": "flag", "indice": 4, "cor": (255, 0, 0)}]
+           {"nome": "flag", "indice": 4, "cor": (255, 0, 0)},
+           {"nome": "spike", "indice": 5, "cor": (100, 100, 100)}]
 
 
 def mousecolide(dict, mousepos, rect = False):
@@ -41,8 +88,8 @@ def mousecolide(dict, mousepos, rect = False):
             return False
 
 
-def gameloop():
-    cenario = Cenario(scr, dictmap, tijolos, mapa)
+def gameloop(playercount):
+    cenario = Cenario(scr, dictmap, tijolos, mapa, playercount)
     run = True
     while run:
         clock.tick(120)
@@ -60,10 +107,15 @@ def gameloop():
 def mainmenu():
     startimg = pygame.image.load("assets/menu/start.png").convert_alpha()
     mapeditorimg = pygame.image.load("assets/menu/mapeditor.png").convert_alpha()
+    playercountimg = pygame.image.load("assets/menu/tutorial.png").convert_alpha()
     startrect = startimg.get_rect()
+    playercountrect = playercountimg.get_rect()
     mapeditorrect = mapeditorimg.get_rect()
     start = {"x": 400, "y": 300, "w": startrect.w, "h": startrect.h}
     mapeditor = {"x": 380, "y": 500, "w": mapeditorrect.w, "h": mapeditorrect.h}
+    playercountdict = {"x": 380, "y": 600, "w": playercountrect.w, "h": playercountrect.h}
+    playercount = 1
+    font = pygame.font.SysFont("Arial", 48, True, False)
 
     run = True
     while run:
@@ -72,8 +124,11 @@ def mainmenu():
         scr.fill((0, 0, 0))
 
         #draw
+        playercountfont = font.render(str(playercount), True, (255, 255, 0))
         scr.blit(mapeditorimg, (mapeditor["x"], mapeditor["y"]))
         scr.blit(startimg, (start["x"], start["y"]))
+        scr.blit(playercountimg, (playercountdict["x"], playercountdict["y"]))
+        scr.blit(playercountfont, (playercountdict["x"] + 200, playercountdict["y"]))
 
         #update
         mouse = pygame.mouse.get_pos()
@@ -92,12 +147,16 @@ def mainmenu():
                             for lin in range(mapsize):
                                 for item in tijolos:
                                     if item["indice"] == mapa[col][lin]:
-                                        itemnew = {"indice": item["indice"], "rect":[lin * 51, col * 38, 51, 38]}
+                                        itemnew = {"indice": item["indice"], "rect":[lin * 25.5, col * 19, 25.5, 19]}
                                         dictmap.append(itemnew)
                         print(dictmap)
-                        gameloop()
+                        gameloop(playercount)
                     elif mousecolide(mapeditor, mouse):
                         mapeditorloop()
+                    elif mousecolide(playercountdict, mouse):
+                        playercount += 1
+                        if playercount >= 5:
+                            playercount = 1
 
         pygame.display.update()
 
@@ -115,7 +174,7 @@ def mapeditorloop():
 
     count = 0
     for bloco in tijolos:
-        tijoloseditor.append({"nome":bloco["nome"], "indice": bloco["indice"],"cor": bloco["cor"], "rect": [30 + (count * 30), 10, 25.5, 19]})
+        tijoloseditor.append({"nome":bloco["nome"], "indice": bloco["indice"],"cor": bloco["cor"], "rect": [30 + (count * 30), 10, 12.75, 9.5]})
         count += 1
 
     selected = 0
@@ -128,16 +187,16 @@ def mapeditorloop():
         #update
         mouse = pygame.mouse.get_pos()
         (xm, ym) = mouse
-        colr = int((xm - 300) // 25.5)
-        linr = int((ym - 250) // 19)
+        colr = int((xm - 300) // 12.75)
+        linr = int((ym - 250) // 9.5)
 
 
         #draw
-        for col in range(20):
-            for lin in range(20):
+        for col in range(mapsize):
+            for lin in range(mapsize):
                 for bloco in tijolos:
                     if bloco["indice"] == mapa[col][lin]:
-                        pygame.draw.rect(scr, bloco["cor"], [300 + (lin * 25.5) , 250 + (col * 19), 25.5 , 19])
+                        pygame.draw.rect(scr, bloco["cor"], [300 + (lin * 12.75) , 250 + (col * 9.5), 12.75 , 9.5])
 
         scr.blit(startimg, (start["x"], start["y"]))
         scr.blit(saveimg, (save["x"], save["y"]))
@@ -149,13 +208,13 @@ def mapeditorloop():
                 mapa[linr][colr] = selected
             for bloco in tijoloseditor:
                 if selected == bloco["indice"]:
-                    xr = (colr * 25.5) + 300
-                    yr = (linr * 19) + 250
-                    pygame.draw.rect(scr, bloco["cor"], [xr, yr, 25.5, 19])
+                    xr = (colr * 12.75) + 300
+                    yr = (linr * 9.5) + 250
+                    pygame.draw.rect(scr, bloco["cor"], [xr, yr, 12.75, 9.5])
         else:
             for bloco in tijoloseditor:
                 if selected == bloco["indice"]:
-                    pygame.draw.rect(scr, bloco["cor"], [xm, ym, 25.5, 19])
+                    pygame.draw.rect(scr, bloco["cor"], [xm, ym, 12.75, 9.5])
         #eventos
         for e in pygame.event.get():
             if e.type == QUIT:
