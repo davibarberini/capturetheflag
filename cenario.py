@@ -184,15 +184,15 @@ class Cenario(object):
             self.scr.blit(self.ply4.scoreimg, (760, 10))
         self.flag.draw()
 
-    def eventos(self):
+    def eventos(self, e):
         if self.playercount > 3:
-            player.eventos(self.playercount, self.ply, self.ply2, self.ply3, self.ply4)
+            player.eventos(self.playercount, self.ply, e, self.ply2, self.ply3, self.ply4)
         elif self.playercount > 2:
-            player.eventos(self.playercount, self.ply, self.ply2, self.ply3)
+            player.eventos(self.playercount, self.ply, e, self.ply2, self.ply3)
         elif self.playercount > 1:
-            player.eventos(self.playercount, self.ply, self.ply2)
+            player.eventos(self.playercount, self.ply, e, self.ply2)
         else:
-            player.eventos(self.playercount, self.ply)
+            player.eventos(self.playercount, self.ply, e)
 
 
 class Flag(object):

@@ -19,6 +19,7 @@ class Player(object):
         self.slow2 = False
         self.alive = True
         self.alivecount = 0
+        self.portal = False
 
     def update(self):
         self.scoreimg = self.font.render("Score: " + str(self.score), True, self.cor)
@@ -72,6 +73,18 @@ class Player(object):
                         self.alive = False
                         self.rect = self.spawn
                         self.prect = pygame.Rect(self.rect)
+                elif b["indice"] == 6:
+                    if self.portal and self.vulnerable:
+                        self.rect[0] = b["rect"][0]
+                        self.rect[1] = b["rect"][1]
+                        self.portal = False
+                        self.vulnerable = False
+                    elif self.prect.colliderect(b["rect"]) and self.vulnerable:
+                        self.portal = True
+                elif b["indice"] == 7:
+                    if self.prect.colliderect(b["rect"]):
+                        self.vely = -10
+
 
             # if ply.rect[1] > 700:
             #   ply.rect[1] = 700
@@ -105,84 +118,77 @@ class Player(object):
                 ply.velx = 0
 """
 
-def eventos(playercount, ply, ply2 = None, ply3 = None, ply4 = None):
+def eventos(playercount, ply, e, ply2 = None, ply3 = None, ply4 = None):
 
-    for e in pygame.event.get():
-        if e.type == QUIT:
-            exit()
-        if e.type == KEYDOWN:
-            if e.key == K_RIGHT:
-                ply.velx = 5
-            elif e.key == K_LEFT:
-                ply.velx = -5
-            elif e.key == K_UP:
-                ply.vely = -6
-            if playercount > 1:
-                if e.key == K_d:
-                    ply2.velx = 5
-                elif e.key == K_a:
-                    ply2.velx = -5
-                elif e.key == K_w:
-                    ply2.vely = -6
-            if playercount > 2:
-                if e.key == K_l:
-                    ply3.velx = 5
-                elif e.key == K_j:
-                    ply3.velx = -5
-                elif e.key == K_i:
-                    ply3.vely = -6
-            if playercount > 3:
-                if e.key == K_n:
-                    ply4.velx = 5
-                elif e.key == K_v:
-                    ply4.velx = -5
-                elif e.key == K_g:
-                    ply4.vely = -6
-            if e.key == K_ESCAPE:
-                from main import mainmenu
-                mainmenu()
-        elif e.type == KEYUP:
-            if e.key == K_RIGHT and ply.velx > 0:
-                if not ply.slow:
-                    ply.velx = 0
+    if e.type == KEYDOWN:
+        if e.key == K_RIGHT:
+            ply.velx = 5
+        elif e.key == K_LEFT:
+            ply.velx = -5
+        elif e.key == K_UP:
+            ply.vely = -6
+        if playercount > 1:
+            if e.key == K_d:
+                ply2.velx = 5
+            elif e.key == K_a:
+                ply2.velx = -5
+            elif e.key == K_w:
+                ply2.vely = -6
+        if playercount > 2:
+            if e.key == K_l:
+                ply3.velx = 5
+            elif e.key == K_j:
+                ply3.velx = -5
+            elif e.key == K_i:
+                ply3.vely = -6
+        if playercount > 3:
+            if e.key == K_n:
+                ply4.velx = 5
+            elif e.key == K_v:
+                ply4.velx = -5
+            elif e.key == K_g:
+                ply4.vely = -6
+    elif e.type == KEYUP:
+        if e.key == K_RIGHT and ply.velx > 0:
+            if not ply.slow:
+                ply.velx = 0
+            else:
+                ply.slow2 = True
+        elif e.key == K_LEFT and ply.velx < 0:
+            if not ply.slow:
+                ply.velx = 0
+            else:
+                ply.slow2 = True
+        if playercount > 1:
+            if e.key == K_d and ply2.velx > 0:
+                if not ply2.slow:
+                    ply2.velx = 0
                 else:
-                    ply.slow2 = True
-            elif e.key == K_LEFT and ply.velx < 0:
-                if not ply.slow:
-                    ply.velx = 0
+                    ply2.slow2 = True
+            elif e.key == K_a and ply2.velx < 0:
+                if not ply2.slow:
+                    ply2.velx = 0
                 else:
-                    ply.slow2 = True
-            if playercount > 1:
-                if e.key == K_d and ply2.velx > 0:
-                    if not ply2.slow:
-                        ply2.velx = 0
-                    else:
-                        ply2.slow2 = True
-                elif e.key == K_a and ply2.velx < 0:
-                    if not ply2.slow:
-                        ply2.velx = 0
-                    else:
-                        ply2.slow2 = True
-            if playercount > 2:
-                if e.key == K_l and ply3.velx > 0:
-                    if not ply3.slow:
-                        ply3.velx = 0
-                    else:
-                        ply3.slow2 = True
-                elif e.key == K_j and ply3.velx < 0:
-                    if not ply3.slow:
-                        ply3.velx = 0
-                    else:
-                        ply3.slow2 = True
-            if playercount > 3:
-                if e.key == K_n and ply4.velx > 0:
-                    if not ply4.slow:
-                        ply4.velx = 0
-                    else:
-                        ply4.slow2 = True
-                elif e.key == K_v and ply4.velx < 0:
-                    if not ply4.slow:
-                        ply4.velx = 0
-                    else:
-                        ply4.slow2 = True
-
+                    ply2.slow2 = True
+        if playercount > 2:
+            if e.key == K_l and ply3.velx > 0:
+                if not ply3.slow:
+                    ply3.velx = 0
+                else:
+                    ply3.slow2 = True
+            elif e.key == K_j and ply3.velx < 0:
+                if not ply3.slow:
+                    ply3.velx = 0
+                else:
+                    ply3.slow2 = True
+        if playercount > 3:
+            if e.key == K_n and ply4.velx > 0:
+                if not ply4.slow:
+                    ply4.velx = 0
+                else:
+                    ply4.slow2 = True
+            elif e.key == K_v and ply4.velx < 0:
+                if not ply4.slow:
+                    ply4.velx = 0
+                else:
+                    ply4.slow2 = True
